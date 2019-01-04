@@ -1,0 +1,90 @@
+body,ul,p,h2{
+		padding: 0;
+		margin: 0;
+	}
+	ul li{
+		list-style: none;
+	}
+	body{
+			background: red;
+		}
+		.box{
+			font:12px/1.5 "微软雅黑",arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+  			color: white;
+  			width:1280px;
+    		height:720px;
+    		margin: 0 auto;
+    		
+		}
+		.item{
+			font-size: 30px;
+			padding-left: 48px;
+			border-bottom: 2px solid  #ccc;
+		}
+		.clearfix li img{
+			width: 286px;
+			height: 206px;
+			float: left;
+			margin-right: 20px;
+		}
+		.clearfix li:after{
+			content: "";
+			clear: both;
+			visibility: hidden;
+		}
+	.clearfix{
+		margin-top: 15px;
+		padding-left: 48px;
+	}
+	.custom-title{
+		margin-top: 15px;
+	}
+
+	.custom-title div{
+		float: left;
+	}
+	.custom-title:after{
+		content: "";
+		display: block;
+		clear: both;
+		visibility: hidden;
+	}
+	.custom-img li img{
+		width: 266px;
+		height: 190px;
+		margin-left: 48px;
+	}
+	.custom-text{
+		font-size: 24px;
+		width: 900px;
+		height: 40px;
+		line-height: 40px;
+		margin-left: 40px;
+		margin-top: 20px;
+		text-indent: 2em;
+	}
+	.news-title{
+		margin-top: 15px;
+	}
+	.news-text{
+		font-size: 24px;
+		width: 770px;
+		margin-left: 48px;
+		text-indent: 2em;
+		height: 50px;
+		line-height:50px;
+	}
+	.news-pic img{
+		width: 378px;
+		height: 260px;
+		margin-left: 40px;
+	}
+	.news-title div{
+		float: left;
+	}
+	.news-title:after{
+		display: block;
+		content: "";
+		clear: both;
+		visibility: hidden;
+	}
