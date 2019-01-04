@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            width:30px;
+            height: 30px;
+            display:inline-block; 
+        }
+        
+        #am{
+            width:1280px;height:720px;
+            overflow: hidden;
+        }
+        .pos{
+            position: relative;
+            top:100px;
+            left:0px;
+        }
+        .focus{
+            width:30px;
+            height:30px;
+            border:1px solid #333;
+        }
+        .libk{
+            width:50px;
+            height: 50px;
+            background: #33a;
+        }
+        /* #data-delay{
+            background: #000;
+        } */
+        
+        .opacity0{
+            background: blue;
+        }
+        .nh{
+            
+            overflow: hidden;
+            background: #aaa;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="am">
+        <div id="nh">
+            <div class="sdf">534</div>
+            <ul>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+                <li class="sa">9</li>
+            </ul>
+            <ul>
+                <li class="pos"><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li class="posa"><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                <li><img src="../zj/interaction/images/play.png" alt=""></li>        
+                   
+                
+            </ul>
+            <ul>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>
+                    <li><img src="../zj/interaction/images/play.png" alt=""></li>    
+            </ul>
+            
+            <p>111</p>
+            <h4>223</h4>
+            <ul>
+                <li>5</li>
+                <li>2</li>
+                <li>3</li>
+                <li>6</li>
+                <li>9</li>
+            </ul>
+            
+            <h2>6</h2>
+            <h2>6</h2>
+            <h2>6</h2>
+            <h2>6</h2>
+            <h2>6</h2>
+            <h3>6</h3>
+            <h3>6</h3>
+            <h3>6</h3>
+            <h3>6</h3>
+            <h3>6</h3>
+        </div>
+    </div>
+    
+    
+    <script src="./jquery-1.12.4.js"></script>
+    <!-- <script type="text/javascript" src="./focus(2).js"></script> -->
+    <script>
+        var focus = {
+        focusModule: "data-focusModule",
+        focusArr: [], //焦点数组
+        currentfocusIndex: -1, //焦点当前在焦点数组的位置
+        lastFocusIndex: -1, //上一个焦点在当前焦点数组的位置
+        centerPoint: 0, //中心点
+        distanceX: 0, //相邻的元素横向距离
+        distanceY: 0, //相邻的元素纵向距离
+        checkMinArr: [],
+        isFirst: true,
+        currentFocusInfo: { //当前焦点的信息
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
+        },
+        toFocusInfo: { //下一个焦点的信息
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
+        },
+        isAnimated: !1,
+        clearTime: -1,
+        KEY_LEFT: function() {
+            console.log('KEY_LEFT');
+            var _this = this;
+            var _currentI = _this.currentfocusIndex;
+            $.each(_this.focusArr, function(index, el) {
+                if ($(el).is(":visible") && index != _currentI) {
+                    _this.initToFocusInfo(index);
+                    if (_this.toFocusInfo.left < _this.currentFocusInfo.left) {
+                        if (_this.isFirst) {
+                            if (_this.toFocusInfo.top >= _this.currentFocusInfo.top && _this.toFocusInfo.top - _this.currentFocusInfo.top < _this.currentFocusInfo.height) {
+                                _this.checkMinCenterPoint(index);
+                            } else if (_this.toFocusInfo.top < _this.currentFocusInfo.top && _this.currentFocusInfo.top - _this.toFocusInfo.top < _this.toFocusInfo.height) {
+                                _this.checkMinCenterPoint(index);
+                            }
+                        } else {
+                            _this.checkMinCenterPoint(index);
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            });
+            
+            if (_this.isFirst && !_this.checkMinArr.length) {
+                _this.isFirst = false;
+                _this.checkMinArr = [];
+                _this.KEY_LEFT();
+                return this;
+            }
+            _this.isFirst = true;
+             _this.checkMinArr = [];
+            this.initCurrentFocusInfo();
+            return this;
+        },
+        KEY_UP: function() {
+            console.log('KEY_UP');
+            var _this = this;
+            var _currentI = _this.currentfocusIndex;
+            $.each(_this.focusArr, function(index, el) {
+                if ($(el).is(":visible") && index != _currentI) {
+                    _this.initToFocusInfo(index);
+                    if (_this.toFocusInfo.top < _this.currentFocusInfo.top) {
+                        if (_this.isFirst) {
+                            if (_this.toFocusInfo.left >= _this.currentFocusInfo.left && _this.toFocusInfo.left - _this.currentFocusInfo.left < _this.currentFocusInfo.width) {
+                                _this.checkMinCenterPoint(index);
+                            } else if (_this.toFocusInfo.left < _this.currentFocusInfo.left && _this.currentFocusInfo.left - _this.toFocusInfo.left < _this.toFocusInfo.width) {
+                                _this.checkMinCenterPoint(index);
+                            } 
+                        }else {
+                            _this.checkMinCenterPoint(index);
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            });
+            if (_this.isFirst && !_this.checkMinArr.length) {
+                _this.isFirst = false;
+                _this.checkMinArr = [];
+                _this.KEY_UP();
+                return this;
+            }
+            _this.isFirst = true;
+            _this.checkMinArr = [];
+            this.initCurrentFocusInfo();
+            return this;
+        },
+        KEY_RIGHT: function() {
+            console.log('KEY_RIGHT');
+            var _this = this;
+            var _currentI = _this.currentfocusIndex;
+            $.each(_this.focusArr, function(index, el) {
+                if ($(el).is(":visible") && index != _currentI) {
+                    _this.initToFocusInfo(index);
+                    if (_this.toFocusInfo.left > _this.currentFocusInfo.left) {
+                        if (_this.isFirst) {
+                            if (_this.currentFocusInfo.top >= _this.toFocusInfo.top && _this.currentFocusInfo.top - _this.toFocusInfo.top < _this.toFocusInfo.height) {
+                                _this.checkMinCenterPoint(index);
+                            } else if (_this.currentFocusInfo.top < _this.toFocusInfo.top && _this.toFocusInfo.top - _this.currentFocusInfo.top < _this.currentFocusInfo.height) {
+
+                                _this.checkMinCenterPoint(index);
+                            } 
+                        }else {
+                            _this.checkMinCenterPoint(index);
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            });
+            console.log(_this.checkMinArr);
+            if (_this.isFirst && !_this.checkMinArr.length) {
+                
+                _this.checkMinArr = [];
+                _this.isFirst = false;
+                _this.KEY_RIGHT();
+                return this;
+            }
+            _this.isFirst = true;
+            _this.checkMinArr = [];
+            this.initCurrentFocusInfo();
+            return this;
+        },
+        KEY_DOWN: function() {
+            console.log('KEY_DOWN');
+            var _this = this;
+            console.log(_this)
+            var _currentI = _this.currentfocusIndex;
+            $.each(_this.focusArr, function(index, el) {
+                if ($(el).is(":visible") && index != _currentI) {
+                    _this.initToFocusInfo(index);
+                    if (_this.toFocusInfo.top > _this.currentFocusInfo.top) {
+                        if (_this.isFirst) {
+                            if (_this.toFocusInfo.left >= _this.currentFocusInfo.left && _this.toFocusInfo.left - _this.currentFocusInfo.left < _this.currentFocusInfo.width) {
+                                _this.checkMinCenterPoint(index);
+                            } else if (_this.toFocusInfo.left < _this.currentFocusInfo.left && _this.currentFocusInfo.left - _this.toFocusInfo.left < _this.toFocusInfo.width) {
+                                _this.checkMinCenterPoint(index);
+                            }
+                        }else {
+                            _this.checkMinCenterPoint(index);
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            });
+            if (_this.isFirst && !_this.checkMinArr.length) {
+                _this.isFirst = false;
+                _this.checkMinArr = [];
+                _this.KEY_DOWN();
+                return this;
+            }
+            _this.isFirst = true;
+             _this.checkMinArr = [];
+            this.initCurrentFocusInfo();
+            return this;
+        },
+        addFocus: function(ele) {
+            this.focusArr.push(ele);
+            return this;
+        },
+        init: function() {
+
+        },
+        initCurrentFocusInfo: function() {
+            var _currentFocus = $(this.focusArr[this.currentfocusIndex]);
+            this.currentFocusInfo.left = _currentFocus.offset().left;
+            this.currentFocusInfo.top = _currentFocus.offset().top;
+            this.currentFocusInfo.width = _currentFocus.outerWidth();
+            this.currentFocusInfo.height = _currentFocus.outerHeight();
+            return this;
+        },
+        initToFocusInfo: function(i) {
+            var _toFocusInfo = $(this.focusArr[i]);
+            this.toFocusInfo.left = _toFocusInfo.offset().left;
+            this.toFocusInfo.top = _toFocusInfo.offset().top;
+            this.toFocusInfo.width = _toFocusInfo.outerWidth();
+            this.toFocusInfo.height = _toFocusInfo.outerHeight();
+            return this;
+        },
+        toFocus: function(FI) {
+            var _this = this;
+            var _isDelay = $(_this.focusArr[_this.currentfocusIndex]).attr("data-delay");
+            if (this.isAnimated) {
+                this.clearTime && clearTimeout(this.clearTime);
+                this.clearTime = setTimeout(function() {
+                    _this.toFocus(FI);
+                    console.log(111);
+                }, 40);
+                return false;
+            }
+            if ("string" == typeof FI) {
+                // _this.currentfocusIndex = $.inArray(FI, _this.focusArr) == -1 ? 0 : $.inArray(FI, _this.focusArr);
+                $.each(_this.focusArr, function(index, el) {
+                    el = $(el);
+                    if (FI.indexOf('#') != -1 && el.attr("id") == FI.replace('#', '')) {
+                        _this.currentfocusIndex = index;
+                    } else if (FI.indexOf('.') != -1 && el.hasClass(FI.replace('.', ''))) {
+                        _this.currentfocusIndex = index;
+                    }
+                });
+            } else if ("number" == typeof FI) {
+                _this.currentfocusIndex = FI;
+            }
+
+
+            _this.lastFocusIndex = _this.currentfocusIndex;
+            _this.initCurrentFocusInfo();
+            $(".libk").removeAttr('class').addClass('libk');
+
+            var thisfocusModule = $(_this.focusArr[_this.currentfocusIndex]).attr(_this.focusModule);
+            if (thisfocusModule == "nofocus") {
+                $(".libk").addClass("opacity0");
+            } else {
+                $(".libk").removeClass('opacity0');
+            }
+            // console.log(_this.currentFocusInfo);
+            $(".libk").css({ "top": _this.currentFocusInfo.top, "left": _this.currentFocusInfo.left, "width": _this.currentFocusInfo.width, "height": _this.currentFocusInfo.height });
+            $(".focus").removeClass('focus');
+            $(_this.focusArr[_this.currentfocusIndex]).addClass('focus');
+
+            _this.centerPoint = 0;
+            return this;
+        },
+        //选择最近的元素
+        checkMinCenterPoint: function(i) {
+            this.checkMinArr.push(i);
+            this.distanceX = this.currentFocusInfo.left + this.currentFocusInfo.width / 2 - (this.toFocusInfo.left + this.toFocusInfo.width / 2);
+            this.distanceY = this.currentFocusInfo.top + this.currentFocusInfo.height / 2 - (this.toFocusInfo.top + this.toFocusInfo.height / 2);
+            if (this.distanceX != 0 || this.distanceY != 0) {
+                if (this.centerPoint == 0 || this.centerPoint > (Math.pow(this.distanceX, 2) + Math.pow(this.distanceY, 2))) {
+                    this.centerPoint = Math.pow(this.distanceX, 2) + Math.pow(this.distanceY, 2);
+                    this.currentfocusIndex = i;
+                }
+            }
+            return this;
+        }
+    };
+    </script>
+    <script>
+        //把想要添加的数组放进focusArr中
+        Array.prototype.push.apply(focus.focusArr, $("#am li"))
+
+        document.onkeydown = function(e){
+          if(focus._isAnimFlag) return
+          var code;
+            if(!e) var e = window.event;
+            if(e.keyCode){
+                code = e.keyCode
+            }else if(e.which){
+                code = e.which
+            }  
+        switch(code){
+            case 37:
+            focus.KEY_LEFT().toFocus()
+            break;
+            case 39:
+            focus.KEY_RIGHT().toFocus()
+            
+            break;
+            case 38:
+            focus.KEY_UP().toFocus()
+            
+            if(parseFloat(focus.currentFocusInfo.top)<0){
+                focus._isAnimFlag = !0;
+                
+                $(".nh").animate({
+                    'margin-top':"+=600"
+                },'fast',function(){
+                    focus._isAnimFlag = !1;
+                   focus.toFocus()
+                })
+                
+            }
+            break;
+            case 40:
+            focus.KEY_DOWN().toFocus()
+            
+            if(parseFloat(focus.currentFocusInfo.top)>600){
+                focus._isAnimFlag = !0;
+                
+                $(".nh").animate({
+                    'margin-top':"-=600"
+                },'fast',function(){
+                    focus._isAnimFlag = !1;
+                   focus.toFocus()
+                })
+                
+            }
+            break;
+        }
+        console.log(this)
+        console.log(e.keyCode)
+        console.log(focus.focusArr)
+        console.log(focus.currentFocusInfo.top)
+        }
+    </script>
+</body>
+</html>
